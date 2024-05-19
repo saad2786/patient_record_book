@@ -40,9 +40,16 @@ const Entry = () => {
           <p className="text-sm font-light">Medicien:</p>
           {mediciens.map((medicien) => {
             return (
-              <div className="flex w-full items-center justify-between border-b border-slate-400 py-1">
-                <p className="text-lg font-semibold">{medicien.name}</p>
-                <p className="text-lg font-semibold">{medicien.qty}</p>
+              <div
+                className="flex w-full items-center justify-between gap-2 border-b border-slate-400 py-1"
+                key={medicien.id}
+              >
+                <p className="w-4/5 overflow-auto text-lg font-semibold">
+                  {medicien.name}
+                </p>
+                <p className="w-1/5 text-right text-sm font-semibold">
+                  {medicien.qty}
+                </p>
               </div>
             );
           })}
