@@ -86,7 +86,7 @@ export async function updateRecord({ cause, mediciens, growth, payment, rid }) {
 
     const medicienData = mediciens.map((medicien) => ({
       name: medicien.name,
-      qty: medicien.quantity,
+      qty: medicien.qty,
       rid,
     }));
 

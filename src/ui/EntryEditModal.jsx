@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { IoCloseSharp } from "react-icons/io5";
-import { addRecord, updateRecord } from "../services/apiRecords";
+import { updateRecord } from "../services/apiRecords";
 import { animated } from "react-spring";
 
 const EntryEditModal = ({
@@ -35,7 +35,7 @@ const EntryEditModal = ({
     setMediciens((prev) => {
       const newMedicien = {
         name: medicien,
-        quantity: qty,
+        qty: qty,
       };
       return [...prev, newMedicien];
     });

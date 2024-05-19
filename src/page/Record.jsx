@@ -58,12 +58,15 @@ const Record = () => {
             className="w-full"
             key={member.mid}
           >
-            <div className="flex w-full items-start justify-between rounded-2xl bg-slate-300 px-4 py-2 shadow-sm">
+            <div className="flex w-full items-start justify-between gap-2 rounded-2xl bg-slate-300 px-4 py-2 shadow-sm">
               <div className="w-3/4">
                 <p className="text-xl font-semibold">{member.patientName}</p>
                 <p className="text-sm">{member.address}</p>
               </div>
-              <p className="w-1/4 text-base font-normal">{member.age} Yr Old</p>
+              <p className="w-1/4 text-base font-normal">
+                <span className="font-semibold">{member.age}</span>
+                Yr Old
+              </p>
             </div>
           </Link>
         ))}
