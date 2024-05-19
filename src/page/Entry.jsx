@@ -4,16 +4,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchRecords } from "../services/apiRecords";
 import Loader from "../ui/Loader";
 import { differenceInDays, format } from "date-fns";
+import { FaEdit } from "react-icons/fa";
+import { useTransition } from "react-spring";
+import EntryEditModal from "../ui/EntryEditModal";
 const Entry = () => {
   const [entry, setEntry] = useState({});
   const [mediciens, setMediciens] = useState([]);
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
   const entryId = useParams().entryId;
   const navigate = useNavigate();
-  const {
-    data: records,
-    isLoading,
-    isRefetching,
-  } = useQuery({
+  const { isLoading, isRefetching, refetch } = useQuery({
     queryKey: ["records"],
     queryFn: fetchRecords,
     onSuccess: (data) => {
@@ -27,6 +28,23 @@ const Entry = () => {
       setMediciens(selectedMediciens);
     },
     onSettled: () => {},
+  });
+  const openEditModal = () => {
+    setIsOpenEditModal(true);
+  };
+  const closeEditModal = () => {
+    setIsOpenEditModal(false);
+  };
+
+  const transition = useTransition(isOpenEditModal, {
+    from: {
+      scale: 0,
+      opacity: 0,
+    },
+    enter: {
+      scale: 1,
+      opacity: 1,
+    },
   });
   const dayAgo = entry
     ? Math.abs(differenceInDays(new Date(entry.date), new Date()))
@@ -82,14 +100,33 @@ const Entry = () => {
           </div>
         </div>
       </div>
-      <div className="mt-4 w-full">
+      <div className="mt-4 flex  w-full items-center justify-center gap-2">
         <button
-          className="btn w-full bg-rose-600 text-white"
+          className="btn w-[49%] bg-rose-600 text-white"
           onClick={() => navigate(-1)}
         >
           Back
         </button>
+        <button
+          className="btn w-[49%] bg-green-500 text-white"
+          onClick={() => openEditModal()}
+        >
+          <FaEdit /> Edit
+        </button>
       </div>
+      {transition((style, isOpen) => (
+        <>
+          {isOpenEditModal ? (
+            <EntryEditModal
+              closeModal={closeEditModal}
+              entry={{ ...entry, id: entryId }}
+              refetch={refetch}
+              mediciens={mediciens}
+              style={style}
+            />
+          ) : null}
+        </>
+      ))}
     </div>
   );
 };

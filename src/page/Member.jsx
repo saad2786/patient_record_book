@@ -79,7 +79,7 @@ const Member = () => {
               <option value="Safravi">Safravi</option>
               <option value="Savdavi">Savdavi</option>
               <option value="Balgami">Balgami</option>
-              <option value="Maail ba savda">Maail ba savda</option>
+              <option value="Damavi">Damavi</option>
             </select>
           </div>
           <div className="flex flex-col items-start justify-center gap-1">
@@ -97,7 +97,7 @@ const Member = () => {
               <option value="Safravi">Safravi</option>
               <option value="Savdavi">Savdavi</option>
               <option value="Balgami">Balgami</option>
-              <option value="Maail ba savda">Maail ba savda</option>
+              <option value="Damavi">Damavi</option>
             </select>
           </div>
         </div>
