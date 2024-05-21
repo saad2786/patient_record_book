@@ -63,8 +63,8 @@ const Member = () => {
             {...register("age", { min: 1, max: 110 })}
           />
         </div>
-        <div className="flex items-start justify-center gap-2">
-          <div className="flex flex-col items-start justify-center gap-1">
+        <div className="flex w-full items-start justify-center gap-2">
+          <div className="flex w-1/2 flex-col items-start justify-center gap-1">
             <label htmlFor="mobile">Mizaj-e-Tabee:</label>
             <select
               type="text"
@@ -82,7 +82,10 @@ const Member = () => {
               <option value="Damavi">Damavi</option>
             </select>
           </div>
-          <div className="flex flex-col items-start justify-center gap-1">
+          <div
+            className="flex
+          w-1/2 flex-col items-start justify-center gap-1"
+          >
             <label htmlFor="mobile">Mizaj-e-Gair-Tabee:</label>
             <select
               type="text"
