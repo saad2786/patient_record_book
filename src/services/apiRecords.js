@@ -22,7 +22,14 @@ export async function fetchRecords() {
   }
 }
 
-export async function addRecord({ cause, mediciens, growth, payment, mid }) {
+export async function addRecord({
+  cause,
+  mediciens,
+  growth,
+  payment,
+  mid,
+  date,
+}) {
   try {
     const { data: record, error } = await supabase
       .from("records")
@@ -33,6 +40,7 @@ export async function addRecord({ cause, mediciens, growth, payment, mid }) {
           growth: growth,
           payment: payment,
           mid: mid,
+          date: date,
         },
       ])
       .select()
@@ -54,7 +62,14 @@ export async function addRecord({ cause, mediciens, growth, payment, mid }) {
   }
 }
 
-export async function updateRecord({ cause, mediciens, growth, payment, rid }) {
+export async function updateRecord({
+  cause,
+  mediciens,
+  growth,
+  payment,
+  rid,
+  date,
+}) {
   try {
     // Update the records table
     const { data: record, error: recordError } = await supabase
@@ -64,6 +79,7 @@ export async function updateRecord({ cause, mediciens, growth, payment, rid }) {
         desc: "",
         growth,
         payment,
+        date,
       })
       .eq("rid", rid)
       .select()

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import { IoCloseSharp } from "react-icons/io5";
 import { updateRecord } from "../services/apiRecords";
 import { animated } from "react-spring";
+import { DatePicker } from "./DatePicker";
+import { format } from "date-fns";
 
 const EntryEditModal = ({
   closeModal,
@@ -19,6 +21,8 @@ const EntryEditModal = ({
   const [medicien, setMedicien] = useState("");
   const [qty, setQty] = useState("");
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const { register, handleSubmit, control } = useForm();
+  const dateRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,8 +32,6 @@ const EntryEditModal = ({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const { register, handleSubmit } = useForm();
 
   function addMedicien() {
     setMediciens((prev) => {
@@ -190,6 +192,18 @@ const EntryEditModal = ({
               defaultValue={entry?.desc}
               id="desc"
               {...register("desc")}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="desc" className="font-medium">
+              Date:
+            </label>
+            <DatePicker
+              defaultValue={format(entry.date, "yyyy-MM-dd")}
+              control={control}
+              dateRef={dateRef}
+              name="date"
+              disabled={false}
             />
           </div>
           <div className="flex items-center justify-center gap-4 pt-4">

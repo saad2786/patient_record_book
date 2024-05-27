@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { IoCloseSharp } from "react-icons/io5";
 import { addRecord } from "../services/apiRecords";
 import { animated } from "react-spring";
+import { DatePicker } from "./DatePicker";
 
 const EntryModal = ({ closeModal, member, refetch, style }) => {
   const [progress, setProgress] = useState(false);
@@ -11,7 +12,8 @@ const EntryModal = ({ closeModal, member, refetch, style }) => {
   const [medicien, setMedicien] = useState("");
   const [qty, setQty] = useState("");
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-
+  const { register, handleSubmit, control } = useForm();
+  const dateRef = useRef(null);
   useEffect(() => {
     const handleResize = () => {
       setWindowHeight(window.innerHeight);
@@ -21,7 +23,6 @@ const EntryModal = ({ closeModal, member, refetch, style }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const { register, handleSubmit } = useForm();
   const mid = member.mid;
 
   function addMedicien() {
@@ -178,6 +179,17 @@ const EntryModal = ({ closeModal, member, refetch, style }) => {
               className="w-full rounded-xl border border-slate-500 p-3"
               id="desc"
               {...register("desc")}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="desc" className="font-medium">
+              Date:
+            </label>
+            <DatePicker
+              control={control}
+              dateRef={dateRef}
+              name="date"
+              disabled={false}
             />
           </div>
           <div className="flex items-center justify-center gap-4 pt-4">
